@@ -150,17 +150,17 @@ INSERT INTO songplays (start_time, user_id, level, song_id, artist_id, session_i
 
 user_table_insert = ("""
 INSERT INTO users (user_id, first_name, last_name, gender, level)
-    SELECT userId, firstName, lastName, gender, level FROM (select userId, firstName, lastName, gender, level , row_number() over(partition by userId order by firstName desc) as sequence from staging_events ) a where sequence =1 
+    SELECT distinct userId, firstName, lastName, gender, level FROM  staging_events
 """)
 
 song_table_insert = ("""
 INSERT INTO songs (song_id, title, artist_id, year, duration)
-    SELECT song_id, title, artist_id, year, duration FROM (select song_id, title, artist_id, year, duration , row_number() over(partition by song_id order by title desc) as sequence from staging_songs ) a where sequence =1  
+    SELECT distinct song_id, title, artist_id, year, duration FROM staging_songs  
 """)
 
 artist_table_insert = ("""
 INSERT INTO artists(artist_id, name, location, lattitude, longitude)
-    SELECT artist_id, artist_name, artist_location, artist_latitude, artist_longitude FROM  (select artist_id, artist_name, artist_location, artist_latitude, artist_longitude, row_number() over(partition by artist_id order by artist_location desc) as sequence from staging_songs ) a where sequence =1  
+    SELECT distinct artist_id, artist_name, artist_location, artist_latitude, artist_longitude FROM  staging_songs  
 """)
 
 time_table_insert = ("""
