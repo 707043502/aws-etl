@@ -16,7 +16,10 @@ Tables are organized as:
 
 
 The following picture shows how we organize our tables.
-![image](https://r766469c826419xjupyterlr5tapor7.udacity-student-workspaces.com/files/schema.png)
+
+<div align=center>
+<img src="https://github.com/707043502/aws-etl/blob/master/pic/schema.png" width="150" height="200">
+</div>
 
 
 **DECISIONS WE MAKE:** We develop 2 strategies to accommondate our growth of data for different tables
